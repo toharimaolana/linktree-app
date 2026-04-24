@@ -11,12 +11,12 @@ export const linksData = [
         gradient: "from-indigo-500 via-purple-600 to-pink-600"
     },
     {
-        id: 2,
-        title: "GitHub Portfolio",
-        description: "Check out my latest projects and code",
-        url: "https://github.com/sitohari",
-        icon: Github,
-        gradient: "from-gray-700 via-gray-800 to-black"
+        id: 5,
+        title: "Instagram",
+        description: "Follow my daily adventures and creative content",
+        url: "https://instagram.com/toharimaolana",
+        icon: Instagram,
+        gradient: "from-purple-600 via-pink-600 to-red-500"
     },
     {
         id: 3,
@@ -27,6 +27,14 @@ export const linksData = [
         gradient: "from-blue-600 via-blue-700 to-blue-800"
     },
     {
+        id: 2,
+        title: "GitHub Portfolio",
+        description: "Check out my latest projects and code",
+        url: "https://github.com/sitohari",
+        icon: Github,
+        gradient: "from-gray-700 via-gray-800 to-black"
+    },
+    {
         id: 4,
         title: "Dribbble Portfolio",
         description: "Explore my design work and projects",
@@ -34,20 +42,11 @@ export const linksData = [
         icon: Camera,
         gradient: "from-fuchsia-600 to-pink-700"
     },
-    {
-        id: 5,
-        title: "Instagram",
-        description: "Follow my daily adventures and creative content",
-        url: "https://instagram.com/toharimaolana",
-        icon: Instagram,
-        gradient: "from-purple-600 via-pink-600 to-red-500"
-    },
 ];
 
 export const profileData = {
   name: "Mohamad Tohari Maolana",
   subtitle: "Web Developer & Designer",
-  avatar: "👋",
 };
 
 export const siteConfig = {
