@@ -6,7 +6,7 @@ export const linksData = [
         id: 1,
         title: "Personal Website",
         description: "Learn more about me and my work",
-        url: "https://tohari-portfolio.vercel.app/",
+        url: "https://toharimaolana.netlify.app/",
         icon: Globe,
         gradient: "from-indigo-500 via-purple-600 to-pink-600"
     },
