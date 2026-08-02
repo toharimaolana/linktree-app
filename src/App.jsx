@@ -1,66 +1,70 @@
-// App.jsx - Main Content
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Import Data
-import { linksData, profileData, siteConfig } from './assets/data.js';
-
-// Import Components
-import LinkCard from './components/LinkCard.jsx';
+import { linksData, profileData, categoriesData } from './assets/data.js';
 import ProfileHeader from './components/ProfileHeader.jsx';
+import LinkCard from './components/LinkCard.jsx';
 import Footer from './components/Footer.jsx';
 
 const App = () => {
+  const [activeCategory, setActiveCategory] = useState('ALL');
+
   const handleLinkClick = (url) => {
-    console.log('Link clicked:', url);
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleEmailClick = (url) => {
-    if (url.startsWith('mailto:')) {
-      window.location.href = url;
-    } else {
-      handleLinkClick(url);
-    }
-  };
+  const filteredLinks = linksData.filter((link) =>
+    activeCategory === 'ALL' ? true : link.category === activeCategory
+  );
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${siteConfig.theme.primaryGradient} p-6`}>
+    <div className="min-h-screen bg-[#0B0B0B] text-[#FAFAFA]">
+      <div className="max-w-lg mx-auto px-6 py-16 sm:py-20">
 
-      <div className="max-w-2xl mx-auto">
-        {/* Profile Header Section */}
-        <ProfileHeader 
-          name={profileData.name}
-          subtitle={profileData.subtitle}
-          avatar={profileData.avatar}
-          bio={profileData.bio}
-        />
+        {/* Profile */}
+        <ProfileHeader profile={profileData} />
 
-        {/* Links Section */}
-        <div className="space-y-4">
-          {linksData.map((link, index) => (
-            <LinkCard
-              key={link.id}
-              title={link.title}
-              description={link.description}
-              url={link.url}
-              icon={link.icon}
-              gradient={link.gradient}
-              delay={index * 0.1}
-              onClick={link.url.startsWith('mailto:') ? handleEmailClick : handleLinkClick}
-            />
-          ))}
+        {/* Filter — text-only, no pill backgrounds */}
+        <div className="flex items-center gap-6 mb-8">
+          {categoriesData.map((cat) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className="relative font-mono text-xs tracking-widest uppercase outline-none transition-colors duration-200"
+                style={{ color: isActive ? '#924DBF' : '#52525B' }}
+              >
+                {cat}
+                {isActive && (
+                  <motion.div
+                    layoutId="filterLine"
+                    className="absolute -bottom-1 left-0 right-0 h-px"
+                    style={{ background: '#924DBF' }}
+                    transition={{ type: 'spring', stiffness: 600, damping: 35 }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Footer Section */}
-        <Footer 
-          customMessage="✨ Built with passion by a creative developer"
-        />
-      </div>
+        {/* Link list */}
+        <div>
+          <AnimatePresence mode="popLayout">
+            {filteredLinks.map((link, index) => (
+              <LinkCard
+                key={link.id}
+                link={link}
+                onClick={handleLinkClick}
+                delay={index * 0.06}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
 
-      {/* Background decorative elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   );

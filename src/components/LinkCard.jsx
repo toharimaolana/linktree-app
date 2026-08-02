@@ -1,94 +1,137 @@
-// components/LinkCard.jsx
-import React, { useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import ElectricBorder from './ElectricBorder';
 
-const LinkCard = ({ 
-  title, 
-  description, 
-  url, 
-  icon: Icon, 
-  gradient, 
-  delay = 0, 
-  onClick 
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
+const ACCENT = '#924DBF';
 
-  const handleClick = () => {
-    if (onClick) {
-      onClick(url);
-    } else {
-      window.open(url, '_blank');
-    }
-  };
+/* ─────────────────────────────────────────────
+   Featured Card — ElectricBorder wrapper
+───────────────────────────────────────────── */
+const FeaturedCard = ({ link, onClick, delay }) => {
+  const Icon = link.icon;
 
   return (
-    <div
-      className="group relative"
-      style={{
-        animation: `slideUp 0.6s ease-out ${delay}s both`
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="mb-6"
     >
-      <div className={`
-        relative overflow-hidden rounded-2xl p-6 cursor-pointer
-        bg-gradient-to-br ${gradient}
-        transform transition-all duration-300 ease-out
-        hover:scale-105 hover:-translate-y-2
-        hover:shadow-2xl hover:shadow-purple-500/25
-        border border-white/20 backdrop-blur-sm
-        ${isHovered ? 'animate-pulse' : ''}
-      `}>
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
-        </div>
-        
-        {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
-          <div className="absolute top-8 left-8 w-1 h-1 bg-white/40 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute bottom-6 right-8 w-1.5 h-1.5 bg-white/20 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-        </div>
+      <ElectricBorder
+        color={link.electricColor || ACCENT}
+        speed={link.electricSpeed || 1.0}
+        chaos={link.electricChaos || 0.03}
+        borderRadius={14}
+      >
+        <motion.button
+          onClick={() => onClick(link.url)}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+          className="group w-full text-left rounded-[14px] bg-[#111111] px-5 py-5 outline-none"
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              {/* Index + FEATURED label */}
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-mono text-[10px] text-[#52525B]">{link.index}</span>
+                <span
+                  className="font-mono text-[10px] tracking-widest uppercase px-1.5 py-0.5 rounded-sm font-bold"
+                  style={{ background: ACCENT, color: '#fff' }}
+                >
+                  FEATURED
+                </span>
+              </div>
 
-        {/* Content */}
-        <div className="relative z-10 flex items-center space-x-4">
-          <div className={`
-            flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center
-            bg-white/20 backdrop-blur-sm border border-white/30
-            transform transition-all duration-300
-            ${isHovered ? 'rotate-12 scale-110' : ''}
-          `}>
-            <Icon className="w-6 h-6 text-white" />
-          </div>
-          
-          <div className="flex-1 min-w-0">
-            <h3 className="text-white font-bold text-lg mb-1 group-hover:text-yellow-200 transition-colors">
-              {title}
-            </h3>
-            <p className="text-white/80 text-sm line-clamp-2">
-              {description}
-            </p>
-          </div>
-          
-          <div className={`
-            flex-shrink-0 transform transition-all duration-300
-            ${isHovered ? 'translate-x-1' : ''}
-          `}>
-            <ExternalLink className="w-5 h-5 text-white/60" />
-          </div>
-        </div>
+              <h2
+                className="text-base font-bold text-[#FAFAFA] leading-tight transition-colors duration-200"
+                style={{ '--hover-color': ACCENT }}
+              >
+                <span className="group-hover:text-[#924DBF] transition-colors duration-200">{link.title}</span>
+              </h2>
+              <p className="mt-1 text-xs text-[#71717A] leading-relaxed">
+                {link.description}
+              </p>
+            </div>
 
-        {/* Hover Glow Effect */}
-        <div className={`
-          absolute inset-0 rounded-2xl transition-opacity duration-300
-          bg-gradient-to-r from-white/10 via-transparent to-white/10
-          ${isHovered ? 'opacity-100' : 'opacity-0'}
-        `}></div>
-      </div>
-    </div>
+            <motion.div
+              className="flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center mt-0.5"
+              style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+              whileHover={{ rotate: 45 }}
+              transition={{ type: 'spring', stiffness: 600, damping: 20 }}
+            >
+              <ArrowUpRight className="h-4 w-4 text-[#71717A] group-hover:text-[#924DBF] transition-colors duration-200" />
+            </motion.div>
+          </div>
+        </motion.button>
+      </ElectricBorder>
+    </motion.div>
   );
+};
+
+/* ─────────────────────────────────────────────
+   Standard Row Card — editorial divider style
+───────────────────────────────────────────── */
+const RowCard = ({ link, onClick, delay }) => {
+  const Icon = link.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <button
+        onClick={() => onClick(link.url)}
+        className="group w-full text-left py-4 flex items-center gap-4 outline-none focus-visible:outline-[1px] focus-visible:outline-[#924DBF]"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+      >
+        {/* Index number */}
+        <span className="font-mono text-[10px] text-[#3F3F46] w-6 flex-shrink-0 select-none">
+          {link.index}
+        </span>
+
+        {/* Icon */}
+        <div
+          className="flex-shrink-0 h-8 w-8 rounded-lg flex items-center justify-center bg-[#161616]"
+          style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+        >
+          <Icon className="h-3.5 w-3.5 text-[#71717A] group-hover:text-[#924DBF] transition-colors duration-200" />
+        </div>
+
+        {/* Text */}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-[#FAFAFA] row-underline group-hover:text-[#924DBF] transition-colors duration-200 leading-tight">
+            {link.title}
+          </p>
+          <p className="text-xs text-[#52525B] mt-0.5 leading-snug">
+            {link.description}
+          </p>
+        </div>
+
+        {/* Arrow */}
+        <motion.div
+          className="flex-shrink-0"
+          initial={{ x: 0, opacity: 0.3 }}
+          whileHover={{ x: 3, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 600, damping: 25 }}
+        >
+          <ArrowUpRight className="h-4 w-4 text-[#3F3F46] group-hover:text-[#924DBF] transition-colors duration-200" />
+        </motion.div>
+      </button>
+    </motion.div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   LinkCard — dispatcher
+───────────────────────────────────────────── */
+const LinkCard = ({ link, onClick, delay }) => {
+  if (link.isFeatured) {
+    return <FeaturedCard link={link} onClick={onClick} delay={delay} />;
+  }
+  return <RowCard link={link} onClick={onClick} delay={delay} />;
 };
 
 export default LinkCard;

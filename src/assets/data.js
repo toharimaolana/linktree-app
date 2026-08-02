@@ -1,59 +1,74 @@
+import { Instagram, Github, Linkedin, Globe, Dribbble } from 'lucide-react';
 
-import { Instagram, Github, Linkedin, Globe,  Camera } from 'lucide-react';
+export const categoriesData = ["ALL", "PORTFOLIO", "SOCIALS"];
 
 export const linksData = [
-    {
-        id: 1,
-        title: "Personal Website",
-        description: "Learn more about me and my work",
-        url: "https://toharimaolana.netlify.app/",
-        icon: Globe,
-        gradient: "from-indigo-500 via-purple-600 to-pink-600"
-    },
-    {
-        id: 5,
-        title: "Instagram",
-        description: "Follow my daily adventures and creative content",
-        url: "https://instagram.com/toharimaolana",
-        icon: Instagram,
-        gradient: "from-purple-600 via-pink-600 to-red-500"
-    },
-    {
-        id: 3,
-        title: "LinkedIn Profile",
-        description: "Connect with me professionally",
-        url: "https://linkedin.com/in/mohamad-tohari-maolana",
-        icon: Linkedin,
-        gradient: "from-blue-600 via-blue-700 to-blue-800"
-    },
-    {
-        id: 2,
-        title: "GitHub Portfolio",
-        description: "Check out my latest projects and code",
-        url: "https://github.com/sitohari",
-        icon: Github,
-        gradient: "from-gray-700 via-gray-800 to-black"
-    },
-    {
-        id: 4,
-        title: "Dribbble Portfolio",
-        description: "Explore my design work and projects",
-        url: "htttps://dribbble.com/sitohari",
-        icon: Camera,
-        gradient: "from-fuchsia-600 to-pink-700"
-    },
+  {
+    id: 1,
+    index: "01",
+    title: "Personal Portfolio",
+    description: "Interactive web experiences, motion & case studies",
+    url: "https://tohari.my.id/",
+    icon: Globe,
+    category: "PORTFOLIO",
+    isFeatured: true,
+    electricColor: "#924DBF",
+    electricSpeed: 1.0,
+    electricChaos: 0.03,
+  },
+  {
+    id: 2,
+    index: "02",
+    title: "GitHub",
+    description: "Open-source experiments & React components",
+    url: "https://github.com/toharimaolana",
+    icon: Github,
+    category: "PORTFOLIO",
+    isFeatured: false,
+  },
+  {
+    id: 3,
+    index: "03",
+    title: "Instagram",
+    description: "Dev logs, personal life & creative process",
+    url: "https://instagram.com/toharimaolana",
+    icon: Instagram,
+    category: "SOCIALS",
+    isFeatured: false,
+  },
+  {
+    id: 4,
+    index: "04",
+    title: "LinkedIn",
+    description: "Professional background & career updates",
+    url: "https://linkedin.com/in/mohamad-tohari-maolana",
+    icon: Linkedin,
+    category: "SOCIALS",
+    isFeatured: false,
+  },
+  {
+    id: 5,
+    index: "05",
+    title: "Dribbble",
+    description: "UI/UX mockups, prototypes & design concepts",
+    url: "https://dribbble.com/sitohari",
+    icon: Dribbble,
+    category: "PORTFOLIO",
+    isFeatured: false,
+  }
 ];
 
 export const profileData = {
   name: "Mohamad Tohari Maolana",
-  subtitle: "Web Developer & Designer",
+  handle: "@toharimaolana",
+  role: "Creative Developer · Frontend Engineer · Community Builder",
+  location: "Jakarta, Indonesia",
+  status: "Available for Work",
+  bio: "Building precise, high-performance web interfaces with motion and code.",
+  avatar: "/profile_8bit.jpeg",
 };
 
 export const siteConfig = {
-  title: "My Linktree",
-  description: "All my important links in one place",
-  theme: {
-    primaryGradient: "from-violet-900 to-slate-900",
-    accentColor: "purple"
-  }
+  title: "Mohamad Tohari Maolana",
+  description: "Personal links — Creative Developer & Interaction Engineer based in Jakarta.",
 };

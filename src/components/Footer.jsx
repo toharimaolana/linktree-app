@@ -1,17 +1,18 @@
-// components/Footer.jsx
 import React from 'react';
 
-const Footer = ({ customMessage }) => {
+const Footer = () => {
   return (
-    <div className="text-center mt-12 text-white/50" style={{animation: 'slideUp 0.6s ease-out 0.8s both'}}>
-      <p className="text-sm">
-        {customMessage || '✨ Made with love using React & Tailwind'}
-      </p>
-      <div className="mt-4 flex justify-center space-x-2">
-        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-        <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-      </div>
+    <div
+      className="mt-14 pb-8 font-mono text-[11px] text-[#3F3F46] flex flex-wrap items-center gap-x-3 gap-y-1"
+      style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '1.5rem' }}
+    >
+      <span>@toharimaolana</span>
+      <span>·</span>
+      <span>Indonesia</span>
+      <span>·</span>
+      <span>{new Date().getFullYear()}</span>
+      <span>·</span>
+      <span>React 19 + Vite</span>
     </div>
   );
 };
